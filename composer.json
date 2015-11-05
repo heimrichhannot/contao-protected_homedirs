@@ -1,0 +1,33 @@
+{
+    "name": "heimrichhannot/contao-protected_homedirs",
+    "description":"A module for adding protected member home directories.",
+    "keywords":["contao", "message", "frontend", "module", "developer"],
+    "type": "contao-module",
+    "homepage":"https://github.com/heimrichhannot/contao-protected_homedirs",
+    "license":"LGPL-3.0+",
+    "authors":[
+        {
+            "name":"Heimrich & Hannot",
+            "email":"digitales@heimrich-hannot.de",
+            "homepage":"http://www.heimrich-hannot.de",
+            "role":"Developer"
+        }
+    ],
+    "support":{
+        "issues":"https://github.com/heimrichhannot/contao-protected_homedirs/issues"
+    },
+    "require": {
+        "contao/core": ">=3.2,<4-dev",
+        "heimrichhannot/contao-haste_plus": ">=1.0.9"
+    },
+    "autoload": {
+        "classmap": [""]
+    },
+    "extra": {
+        "contao": {
+            "sources": {
+                "": "system/modules/protected_homedirs"
+            }
+        }
+    }
+}
