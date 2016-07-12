@@ -27,6 +27,17 @@ class ProtectedHomeDirs extends \Controller
 						return;
 				}
 
+				if (\Config::get('allowAccessByMemberGroups'))
+				{
+					$arrAllowedGroups = deserialize(\Config::get('allowedMemberGroups'), true);
+
+					if (($objMember = \FrontendUser::getInstance()) !== null)
+					{
+						if (array_intersect(deserialize($objMember->groups, true), $arrAllowedGroups))
+							return;
+					}
+				}
+
 				$intNoAccessPage = \Config::get('jumpToNoAccess');
 				if ($intNoAccessPage && ($objPageJumpTo = \PageModel::findByPk($intNoAccessPage)) !== null)
 				{
