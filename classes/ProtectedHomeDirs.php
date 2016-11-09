@@ -2,6 +2,9 @@
 
 namespace HeimrichHannot\ProtectedHomeDirs;
 
+use HeimrichHannot\Haste\Util\Files;
+use HeimrichHannot\Haste\Util\StringUtil;
+
 class ProtectedHomeDirs extends \Controller
 {
 	public static function checkPermissionForProtectedHomeDirs($strFile)
@@ -13,28 +16,29 @@ class ProtectedHomeDirs extends \Controller
 
 		if ($strUuid && ($strProtectedHomeDirRootPath = \HeimrichHannot\HastePlus\Files::getPathFromUuid($strUuid)) !== null)
 		{
-			$intPos = strpos($strFile, ltrim($strProtectedHomeDirRootPath, '/'));
-
-			if ($intPos !== false && $intPos == 0)
+			// check only if path inside the protected root dir
+			if (StringUtil::startsWith($strFile, $strProtectedHomeDirRootPath))
 			{
-				if (\Config::get('allowAccessByMemberId') &&
-					($objFolder = \FilesModel::findByPath(rtrim(str_replace(basename($strFile), '', $strFile), '/'))) !== null)
+				if (FE_USER_LOGGED_IN)
 				{
-					$objMember = \MemberModel::findBy('protectedHomeDir', $objFolder->uuid);
-
-					// fe user id = dir owner member id
-					if (\FrontendUser::getInstance()->id == $objMember->id)
-						return;
-				}
-
-				if (\Config::get('allowAccessByMemberGroups'))
-				{
-					$arrAllowedGroups = deserialize(\Config::get('allowedMemberGroups'), true);
-
-					if (($objMember = \FrontendUser::getInstance()) !== null)
+					if (($objFrontendUser = \FrontendUser::getInstance()) !== null)
 					{
-						if (array_intersect(deserialize($objMember->groups, true), $arrAllowedGroups))
-							return;
+						if (\Config::get('allowAccessByMemberId') && $objFrontendUser->assignProtectedDir &&
+							$objFrontendUser->protectedHomeDir)
+						{
+							$strProtectedHomeDirMemberRootPath = Files::getPathFromUuid($objFrontendUser->protectedHomeDir);
+							// fe user id = dir owner member id
+							if (StringUtil::startsWith($strFile, $strProtectedHomeDirMemberRootPath))
+								return;
+						}
+
+						if (\Config::get('allowAccessByMemberGroups'))
+						{
+							$arrAllowedGroups = deserialize(\Config::get('allowedMemberGroups'), true);
+
+							if (array_intersect(deserialize($objFrontendUser->groups, true), $arrAllowedGroups))
+								return;
+						}
 					}
 				}
 
