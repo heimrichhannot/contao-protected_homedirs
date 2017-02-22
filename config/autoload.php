@@ -14,17 +14,17 @@
 /**
  * Register the namespaces
  */
-ClassLoader::addNamespaces(array
-(
-	'HeimrichHannot',
-));
+ClassLoader::addNamespaces(
+    [
+	'HeimrichHannot',]
+);
 
 
 /**
  * Register the classes
  */
-ClassLoader::addClasses(array
-(
+ClassLoader::addClasses(
+    [
 	// Classes
-	'HeimrichHannot\ProtectedHomeDirs\ProtectedHomeDirs' => 'system/modules/protected_homedirs/classes/ProtectedHomeDirs.php',
-));
+	'HeimrichHannot\ProtectedHomeDirs\ProtectedHomeDirs' => 'system/modules/protected_homedirs/classes/ProtectedHomeDirs.php',]
+);

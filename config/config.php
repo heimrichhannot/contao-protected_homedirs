@@ -3,6 +3,6 @@
 /**
  * Hooks
  */
-$GLOBALS['TL_HOOKS']['postDownload']['checkPermissionForProtectedHomeDirs'] = array(
+$GLOBALS['TL_HOOKS']['postDownload']['checkPermissionForProtectedHomeDirs'] = [
 	'HeimrichHannot\\ProtectedHomeDirs\\ProtectedHomeDirs', 'checkPermissionForProtectedHomeDirs'
-);
+];

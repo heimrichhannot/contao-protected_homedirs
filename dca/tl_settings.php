@@ -16,43 +16,35 @@ $arrDca['subpalettes']['allowAccessByMemberGroups'] = 'allowedMemberGroups';
 /**
  * Fields
  */
-$arrFields = array(
-	'protectedHomeDirRoot' => array
-	(
+$arrFields = [
+    'protectedHomeDirRoot' => [
 		'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['protectedHomeDirRoot'],
 		'exclude'                 => true,
 		'inputType'               => 'fileTree',
-		'eval'                    => array('fieldType'=>'radio', 'tl_class'=>'w50')
-	),
-	'jumpToNoAccess' => array(
+		'eval'                    => ['fieldType' =>'radio', 'tl_class' =>'w50']],
+    'jumpToNoAccess' => [
 		'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['jumpToNoAccess'],
 		'exclude'                 => true,
 		'inputType'               => 'pageTree',
-		'eval'                    => array('fieldType'=>'radio', 'tl_class' => 'w50')
-	),
-	'allowAccessByMemberId' => array
-	(
+		'eval'                    => ['fieldType' =>'radio', 'tl_class' => 'w50']
+    ],
+    'allowAccessByMemberId' => [
 		'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['allowAccessByMemberId'],
 		'exclude'                 => true,
 		'inputType'               => 'checkbox',
-		'eval'                    => array('tl_class' => 'w50 clr')
-	),
-	'allowAccessByMemberGroups' => array
-	(
+		'eval'                    => ['tl_class' => 'w50 clr']],
+    'allowAccessByMemberGroups' => [
 		'label'                   => &$GLOBALS['TL_LANG']['tl_settings']['allowAccessByMemberGroups'],
 		'exclude'                 => true,
 		'inputType'               => 'checkbox',
-		'eval'                    => array('submitOnChange' => true, 'tl_class' => 'w50')
-	),
-	'allowedMemberGroups' => array
-	(
-		'label'      => &$GLOBALS['TL_LANG']['tl_calendar_events']['allowedMemberGroups'],
-		'inputType'  => 'select',
-		'exclude'    => true,
-		'eval'       => array('tl_class' => 'w50', 'multiple' => true, 'mandatory' => true, 'chosen' => true),
-		'foreignKey' => 'tl_member_group.name',
-		'sql'        => "int(16) NOT NULL"
-	)
-);
+		'eval'                    => ['submitOnChange' => true, 'tl_class' => 'w50']],
+    'allowedMemberGroups' => [
+        'label'      => &$GLOBALS['TL_LANG']['tl_calendar_events']['allowedMemberGroups'],
+        'inputType'  => 'select',
+        'exclude'    => true,
+        'eval'       => ['tl_class' => 'w50', 'multiple' => true, 'mandatory' => true, 'chosen' => true],
+        'foreignKey' => 'tl_member_group.name',
+        'sql'        => "int(16) NOT NULL"]
+];
 
 $arrDca['fields'] += $arrFields;
